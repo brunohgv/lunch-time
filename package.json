@@ -10,6 +10,8 @@
   "author": "Bruno Vasconcelos <brunohgv2@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
   }
 }

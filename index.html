@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+  <title>Document</title>
+
+  <style>
+    .lunchtime-btn {
+      color: white;
+      background: red;
+      height: 200px;
+      width: 200px;
+      font-size: 46px;
+      font-weight: bold
+    }
+  </style>
+
+</head>
+<body>
+  <div id="messages"></div>
+
+  <button id="lunchtimebtn" class="lunchtime-btn">
+    LUNCH TIME
+  </button>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io()
+
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!Notification) {
+        alert('Desktop notifications not available in your browser. Try Chromium.'); 
+        return;
+      }
+
+      if (Notification.permission !== "granted") {
+        Notification.requestPermission();
+      }
+    });
+
+    function notifyMe() {
+      if (Notification.permission !== "granted") {
+        Notification.requestPermission();
+      } else {
+        var notification = new Notification('LUNCH TIIIIIIME', {
+          icon: 'https://i.ytimg.com/vi/pkolw_yFS8A/hqdefault.jpg',
+          body: "TO CO FOMEEEEEEE",
+        });
+      }
+    }
+
+    socket.on('connect', function () {
+      // $('#messages').append('Connected with id: ', socket.id + '<br />')
+      // socket.emit('message', 'I am connected ' + socket.id)
+    })
+
+    socket.on('lunchtime', function () {
+      notifyMe()
+      setInterval(changeCSS)
+    })
+
+    $('#lunchtimebtn').click(function(key) {
+        socket.emit('lunchtime')
+    })
+  </script>
+</body>
+</html>

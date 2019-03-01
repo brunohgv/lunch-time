@@ -63,7 +63,8 @@
     })
 
     $('#lunchtimebtn').click(function(key) {
-        socket.emit('lunchtime')
+      notifyMe()
+      socket.emit('lunchtime')
     })
   </script>
 </body>

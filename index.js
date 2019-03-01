@@ -16,5 +16,11 @@ io.on('connection', socket => {
 })
 
 http.listen(PORT, () => {
+
+app.get('/', (req, res) => {
+  res.send('Server Running')
+})
+
+app.listen(PORT, () => {
   console.log(`runnig on port ${PORT}`)
 })
